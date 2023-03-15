@@ -27,8 +27,18 @@ It then takes the input and transforms the note distribution into a transition m
 
  Where each column is represented by the following notes
  {"C" , "Db",  "D", "Eb",  "E",  "F", "Gb",  "G", "Ab",  "A", "Bb",  "B"}
- 
  ```
+We can use another Markhov Chain to determine the rhythms, below is a following matrix:
+
+```c++
+{{0.0, 0.0, 0.75, 0.25}
+ {0.0, 0.333, 0.0, 0.666}
+ {0.0, 0.5, 0.0, 0.5}
+ {0.0, 0.1666, 0.0, 0.8333}};
+
+Where each column is corresponds with the following rhythms
+{"sixteenth", "eighth", "quarter", "half"}
+```
 
 Here is an example output or open music.pdf in `./src` for the full sheet music:
 ![test](Example.png?raw=true "Title")
