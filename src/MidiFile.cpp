@@ -9,13 +9,18 @@ class MidiFile{
     //Private members
     private:
         vector<MidiTrack> midi_tracks;
+        vector<MidiNote> notes_list;
         uint32_t m_nTempo = 0;
         uint32_t m_nBPM = 0;
+        char reference_notes[12] = {'C', 'd', 'D', 'e', 'E', 'F', 'g', 'G', 'a', 'A', 'b', 'B'};
+        char *note_to_distribution;
+        int note_array_size; 
 
     //Constructor and public functions
     public:
         MidiFile(const string &file_name){
             parse_file(file_name);
+            note_to_distribution = parse_notes();
         }
 
         enum EventName : uint8_t{					
@@ -264,26 +269,40 @@ class MidiFile{
     }
 
 
-    vector<MidiNote> get_notes(){
+    char *parse_notes(){
         vector<MidiNote> notes_list;
         for (auto& track : midi_tracks){
 			uint32_t nWallTime = 0;
 
-			for (auto& event : track.midi_events)
-			{
+			for (auto& event : track.midi_events){
 				nWallTime += event.delta_tick;
 
 				if (event.event_type == MidiEvent::Type::NoteOn)
 				{
 					// New Note
                     MidiNote note(event.pitch, event.velocity, nWallTime, 0);
-					notes_list.push_back(note);
+                    notes_list.push_back(note);
 				}
             }
         }
-        return notes_list;
+        int counter = 0;
+        char *notes = new char[notes_list.size()];
+        for(auto& i : notes_list){
+            notes[counter] = reference_notes[i.nKey%12];
+            counter++;
+        }
+        note_array_size = notes_list.size();
+        return notes;
     }
 
+    char* get_notes(){
+        return note_to_distribution;
+    }
+
+    int get_note_array_size(){
+        return note_array_size;
+    }
+        
     //Private Functions
     private:
         //Swap bits 32 bit integer
@@ -327,7 +346,3 @@ class MidiFile{
             return value;
         }
 };
-
-// int main(){
-//     std::cout << "Done";
-// }

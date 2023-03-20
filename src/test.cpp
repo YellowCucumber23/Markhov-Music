@@ -2,10 +2,11 @@
 
 int main(){
     MidiFile *track = new MidiFile("./miditest.mid");
-    vector<MidiNote> temp = track -> get_notes();
-    vector<char> notes = {'C', 'd', 'D', 'e', 'E', 'F', 'g', 'G', 'a', 'A', 'b', 'B'};
+    char *notes = track->get_notes();
 
-    for(auto i : temp){
-        std::cout << notes[i.nKey%12] << " ";
+    for(int i = 0; i < track -> get_note_array_size(); ++i){
+        std::cout << notes[i] << " ";
     }
+
+    
 }
