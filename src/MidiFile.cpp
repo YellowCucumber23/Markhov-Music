@@ -285,6 +285,8 @@ class MidiFile{
 				}
             }
         }
+
+        //Convert to character array
         int counter = 0;
         char *notes = new char[notes_list.size()];
         for(auto& i : notes_list){

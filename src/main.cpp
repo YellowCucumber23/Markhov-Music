@@ -66,7 +66,7 @@ int main(){
         cout << notes[note_index] << " ";
         cout << duration[dur_index] << " ";
 
-        // //First if to set the octave
+        //First if to set the octave
         if(j == 0){
             if(notes[note_index] >= 0x61 && notes[note_index] <= 0x7A){                 //if note is a flat(lowercase)
                 myfile << notes[note_index] << "es\'" << " ";
