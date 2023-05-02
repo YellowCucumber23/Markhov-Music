@@ -42,3 +42,6 @@ Where each column is corresponds with the following rhythms
 
 Here is an example output or open music.pdf in `./src` for the full sheet music:
 ![test](Example.png?raw=true "Title")
+
+
+You can run `test.cpp` to see how the MidiFile is being parsed in `MidiFile.cpp`
